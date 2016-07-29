@@ -18,16 +18,23 @@
             </div>
         </div><!-- end of header content-->
         <div class="maincontent">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red; margin-left: 25%">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div class="row">
             <p style="text-align:right"> Welcome: <span class="boldme">{{ session['name']}}</span> - ({{ session['id']}}) - <a href="/logout">Logout</a></p>
             </div>
             <div class="column">
                 <div class="row"><h3>Quotable Quotes:</h3></div>
-                {% if allQuotes %}
-                    {% for quote in allQuotes %}
-                        <div class="row"><p>Quote goes here</p></div>
-                        <div class="row"><p><a href="">Posted by: </a> name</p></div>
-                        <div class="row"><p><a href="">Add to my favorites list</a></p></div>
+                {% if allQuote %}
+                    {% for quote in allQuote %}
+                        <div class="row"><p>{{ quote['message'] }}</p></div>
+                        <div class="row"><p>Posted by: <a href="/userEntries/{{ quote['userID']}}"> {{ quote['first_name'] }}</a> - <a href="/addFav/{{ quote['qouteID'] }}"> Add to favorites - quoteID: {{ quote['qoutesID'] }}</a></p></div>
+                        </br>
                     {% endfor %}
                 {% endif %}
             </div>

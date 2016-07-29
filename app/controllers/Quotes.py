@@ -12,7 +12,8 @@ class Quotes(Controller):
             session['id']
         except:
             return redirect ('/')
-        return self.load_view('dashboard.html')
+        allQuote = self.models['QuotesModel'].allQuote()
+        return self.load_view('dashboard.html', allQuote=allQuote)
 
     def addQuote(self):
         #add new quote
@@ -21,22 +22,28 @@ class Quotes(Controller):
             'message':request.form['message']
         }
         addnew = self.models['QuotesModel'].addQuote(userInfo)
-        # print ('!' * 25)
-        # print addnew
-        # print ('!' * 25)
-        return redirect('/dashboard')
+        if addnew['status']  == False:
+            #return to logon page and show errors
+            for message in addnew['errors']:
+                flash(message)
+            return redirect('/dashboard')
+        else:
+            return redirect('/dashboard')
 
-    def addFavorite(self, id):
+    def addFav(self, id):
         #make a quote a favorite
+        addFav = self.models['QuotesModel'].addFav(id)
         return redirect('/dashboard')
 
-    def removeFavorite(self,id):
+    def removeFav(self,id):
         #remove a quote from favorite list
         return redirect('/dashboard')
 
-    def userEntrie(self):
+    def userEntries(self, id):
         #show all of the qoutes the user created
+        entries = self.models['QuotesModel'].userEntries(id)
         #show the count of the number of quotes
-        return self.load_view('userDetails.html')
+        entryCount = self.models['QuotesModel'].entryCount(id)
+        return self.load_view('userDetail.html', entries=entries, entryCount=entryCount)
 
 

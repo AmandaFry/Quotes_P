@@ -11,7 +11,7 @@
 <body>	
     <div class="container">
         <div class="header">
-            <h1><span>(Pylot) </span> Exam B - Quotes: User Details</h1>
+            <h1><span>(Pylot) </span> Exam B - Quotes: User Entries</h1>
             <h3>Assigment - optional</h3>
             <div class="descr">
                 <p>Assigment description: </p>
@@ -19,13 +19,14 @@
         </div><!-- end of header content-->
         <div class="maincontent">
             <div class="row">
-            <p style="text-align:right"> Welcome: <span class="boldme">{{ session['name']}}</span> - ({{ session['id']}}) - <a href="/dashboard">Home</a> - <a href="/logout">Logout</a></p>
+            <p style="text-align:right"> Welcome: <span class="boldme">{{ session['name']}}</span> - ({{ session['id']}}) - <a href="/dashboard">Dashboard</a> - <a href="/logout">Logout</a></p>
             </div>
-            <div class="row"><h3>Posted by: </h3></div>
-            <div class="row"><h3>Count: </h3></div>
-            {% if myentires %}
-                {% for entry in myentires %}
-                    <div class="row"><p><span class="author">author name: </span> message goes here</p></div>
+            <div class="row"><h3>Posted by: {{ entries[0]['first_name'] }}</h3></div>
+            <div class="row"><h3>Count: {{ entryCount }}</h3></div>
+            {% if entries %}
+                {% for entry in entries %}
+                    <div class="row"><p><span class="author">{{ entry['author'] }} </span> {{ entry['message'] }}</p></div>
+                    </br>
                 {% endfor %}
             {% endif %}
         </div><!-- end of main content-->
