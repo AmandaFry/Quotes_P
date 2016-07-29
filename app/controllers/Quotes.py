@@ -16,6 +16,14 @@ class Quotes(Controller):
 
     def addQuote(self):
         #add new quote
+        userInfo = {
+            'author':request.form['author'],
+            'message':request.form['message']
+        }
+        addnew = self.models['QuotesModel'].addQuote(userInfo)
+        # print ('!' * 25)
+        # print addnew
+        # print ('!' * 25)
         return redirect('/dashboard')
 
     def addFavorite(self, id):

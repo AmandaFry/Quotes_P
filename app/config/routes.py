@@ -5,6 +5,7 @@ routes['POST']['/login'] = 'User#processLogin'
 routes['POST']['/register'] = 'User#processRegister'
 routes['GET']['/logout'] = 'User#logout'
 routes['GET']['/dashboard'] = 'Quotes#dashboard'
+routes['POST']['/addQuote'] = 'Quotes#addQuote'
 
 
 """
