@@ -55,12 +55,18 @@ class QuotesModel(Model):
     	return (entryCount)
 
     def addFav(self, id):
-    	query = "INSERT INTO favorites (user_id, quote_id, created_at, updated_at) VALUES (:user_id, :quote_is, NOW(), NOW());"
+    	query = "INSERT INTO favorites (user_id, quote_id, created_at, updated_at) VALUES (:user_id, :quote_id, NOW(), NOW());"
     	data = { 
     		'user_id' : session['id'],
     		'quote_id': id
     	}
         addFav = self.db.query_db(query, data)
         return {"status": True}
+
+    def allFav(self):
+    	query ="SELECT favorites.quote_id as favQID, quotes.author, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id JOIN favorites ON quotes.id = favorites.quote_id where user_id = :id"
+    	data = {'id': session['id'] }
+    	allFav = self.db.query_db(query, data)
+    	return (allFav)
 
 

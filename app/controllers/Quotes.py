@@ -13,7 +13,8 @@ class Quotes(Controller):
         except:
             return redirect ('/')
         allQuote = self.models['QuotesModel'].allQuote()
-        return self.load_view('dashboard.html', allQuote=allQuote)
+        allFav = self.models['QuotesModel'].allFav()
+        return self.load_view('dashboard.html', allQuote=allQuote, allFav=allFav)
 
     def addQuote(self):
         #add new quote

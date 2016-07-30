@@ -7,6 +7,7 @@ routes['GET']['/logout'] = 'User#logout'
 routes['GET']['/dashboard'] = 'Quotes#dashboard'
 routes['POST']['/addQuote'] = 'Quotes#addQuote'
 routes['GET']['/addFav/<id>'] = 'Quotes#addFav'
+routes['GET']['/removeFav/<id>'] = 'Quotes#removeFav'
 routes['GET']['/userEntries/<id>'] = 'Quotes#userEntries'
 
 

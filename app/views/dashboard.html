@@ -33,18 +33,18 @@
                 {% if allQuote %}
                     {% for quote in allQuote %}
                         <div class="row"><p>{{ quote['message'] }}</p></div>
-                        <div class="row"><p>Posted by: <a href="/userEntries/{{ quote['userID']}}"> {{ quote['first_name'] }}</a> - <a href="/addFav/{{ quote['qouteID'] }}"> Add to favorites - quoteID: {{ quote['qoutesID'] }}</a></p></div>
+                        <div class="row"><p>Posted by: <a href="/userEntries/{{ quote['userID']}}"> {{ quote['first_name'] }}</a> - <a href="/addFav/{{ quote['quotesID'] }}"> Add to favorites</a></p></div>
                         </br>
                     {% endfor %}
                 {% endif %}
             </div>
             <div class="column">
                 <div class="row"><h3>Your Favorites:</h3></div>
-                {% if favQuotes %}
-                    {% for fqoute in favQuotes %}
-                        <div class="row"><p>Quote goes here</p></div>
-                        <div class="row"><p><a href="">Posted by: </a> name</p></div>
-                        <div class="row"><p><a href="">Remove from my favorites list</a></p></div>
+                {% if allFav %}
+                    {% for fqoute in allFav %}
+                        <div class="row"><p>{{ fqoute['message']}}</p></div>
+                        <div class="row"><p>Posted by:<a href="">{{fqoute['first_name']}} </a> - <a href="/removeFav/{{ fqoute['quotesID'] }}">Remove from my favorites list</a></p></div>
+                        </br>
                     {% endfor %}
                 {% endif %}
                 <div class="space"> </div>
