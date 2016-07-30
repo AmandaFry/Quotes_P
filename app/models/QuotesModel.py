@@ -1,11 +1,6 @@
 from system.core.model import Model
 from flask import Flask, flash, session
-from datetime import datetime
-import re
 
-NOSPACE_REGEX = re.compile(r'^[a-zA-Z0-9]*$')
-THREEPLUS = re.compile(r'^[A-Za-z\d]{3,}$')
-TENPLUS = re.compile(r'^[A-Za-z\d]{10,}$')
 
 class QuotesModel(Model):
     def __init__(self):
@@ -32,13 +27,9 @@ class QuotesModel(Model):
 	        return {"status": True}
 
     def allQuote(self):
-    	#query = "SELECT  quotes.id as quotesID, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id"
     	query = "SELECT  quotes.id as quotesID, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id WHERE quotes.id NOT IN (SELECT quote_id from quotes JOIN favorites ON quotes.id = favorites.quote_id where user_id = :id)"
     	data = { 'id': session['id']}
     	allQuote = self.db.query_db(query, data)
-    	# print ('!' * 25)
-     #    print allQuote
-     #    print ('!' * 25)
     	return (allQuote)
 
     def userEntries(self, id):
@@ -53,7 +44,6 @@ class QuotesModel(Model):
     	data = { 'id': id}
     	result = self.db.query_db(query, data)
     	entryCount = int(result[0]['total'])
-    	# entryCount = self.db.query_db(query, data)
     	return (entryCount)
 
     def addFav(self, id):

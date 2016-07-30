@@ -33,7 +33,7 @@
                 {% if allQuote %}
                     {% for quote in allQuote %}
                         <div class="row"><p>{{ quote['message'] }}</p></div>
-                        <div class="row"><p>Posted by: <a href="/userEntries/{{ quote['userID']}}"> {{ quote['first_name'] }}</a> - <a href="/addFav/{{ quote['quotesID'] }}"> Add to favorites</a></p></div>
+                        <div class="row"><p>Posted by: <a href="/userEntries/{{ quote['userID']}}"> {{ quote['first_name'] }}</a> - <a href="/addFav/{{ quote['quotesID'] }}"><button> Add to favorites</button></a></p></div>
                         </br>
                     {% endfor %}
                 {% endif %}
@@ -43,7 +43,7 @@
                 {% if allFav %}
                     {% for fqoute in allFav %}
                         <div class="row"><p>{{ fqoute['message']}}</p></div>
-                        <div class="row"><p>Posted by:<a href="">{{fqoute['first_name']}} </a> - <a href="/removeFav/{{ fqoute['favQID'] }}">Remove from my favorites list - {{ fqoute['favQID'] }}</a></p></div>
+                        <div class="row"><p>Posted by: <a href="/userEntries/{{ fqoute['userID']}}">{{fqoute['first_name']}} </a> - <a href="/removeFav/{{ fqoute['favQID'] }}"><button>Remove from my favorites</button></a></p></div>
                         </br>
                     {% endfor %}
                 {% endif %}
