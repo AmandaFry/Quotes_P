@@ -14,6 +14,7 @@ class Quotes(Controller):
             return redirect ('/')
         allQuote = self.models['QuotesModel'].allQuote()
         allFav = self.models['QuotesModel'].allFav()
+        print allFav
         return self.load_view('dashboard.html', allQuote=allQuote, allFav=allFav)
 
     def addQuote(self):
@@ -38,6 +39,7 @@ class Quotes(Controller):
 
     def removeFav(self,id):
         #remove a quote from favorite list
+        removeFav = self.models['QuotesModel'].removeFav(id)
         return redirect('/dashboard')
 
     def userEntries(self, id):

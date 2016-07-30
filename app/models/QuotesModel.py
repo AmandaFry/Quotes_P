@@ -32,11 +32,13 @@ class QuotesModel(Model):
 	        return {"status": True}
 
     def allQuote(self):
-    	query = "SELECT  quotes.id as quotesID, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id"
-    	allQuote = self.db.query_db(query)
-    	print ('!' * 25)
-        print allQuote
-        print ('!' * 25)
+    	#query = "SELECT  quotes.id as quotesID, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id"
+    	query = "SELECT  quotes.id as quotesID, quotes.message, users.id as userID, users.first_name FROM quotes JOIN users ON quotes.uses_id = users.id WHERE quotes.id NOT IN (SELECT quote_id from quotes JOIN favorites ON quotes.id = favorites.quote_id where user_id = :id)"
+    	data = { 'id': session['id']}
+    	allQuote = self.db.query_db(query, data)
+    	# print ('!' * 25)
+     #    print allQuote
+     #    print ('!' * 25)
     	return (allQuote)
 
     def userEntries(self, id):
@@ -69,4 +71,10 @@ class QuotesModel(Model):
     	allFav = self.db.query_db(query, data)
     	return (allFav)
 
+
+    def removeFav(self, id):
+    	query = "DELETE FROM favorites WHERE quote_id = :id"
+    	data = { 'id': id}
+    	removeFav = self.db.query_db(query, data)
+        return {"status": True}
 

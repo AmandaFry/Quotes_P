@@ -43,7 +43,7 @@
                 {% if allFav %}
                     {% for fqoute in allFav %}
                         <div class="row"><p>{{ fqoute['message']}}</p></div>
-                        <div class="row"><p>Posted by:<a href="">{{fqoute['first_name']}} </a> - <a href="/removeFav/{{ fqoute['quotesID'] }}">Remove from my favorites list</a></p></div>
+                        <div class="row"><p>Posted by:<a href="">{{fqoute['first_name']}} </a> - <a href="/removeFav/{{ fqoute['favQID'] }}">Remove from my favorites list - {{ fqoute['favQID'] }}</a></p></div>
                         </br>
                     {% endfor %}
                 {% endif %}
